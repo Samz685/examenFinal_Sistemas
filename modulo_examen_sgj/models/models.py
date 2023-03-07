@@ -34,10 +34,28 @@ class Producto(models.Model):
     name = fields.Char(required=True, string='Nombre')
     description = fields.Text(string='Descripción')
     pvp = fields.Float(string='Precio')
+    cantidad = fields.Integer(string='Cantidad')
+    precio_total = fields.Float(string='Precio Total', compute='_compute_precio_total')
 
-    # Sirve para validar.
-    @api.constrains('pvp')
-    def _verificador(self):
+    def zero_price_when_no_stock(func):
+        def wrapper(producto):
+            if producto.cantidad == 0:
+                producto.pvp = 0
+            return func(producto)
+
+        return wrapper
+
+    @api.depends('pvp', 'cantidad')
+    def _compute_precio_total(self):
         for record in self:
-            if record.pvp < 2:
-                raise ValidationError("El precio recomendado tiene que ser mayor que 2")
+            record.precio_total = record.pvp * record.cantidad
+
+    @api.model
+    @zero_price_when_no_stock
+    def create(self, vals):
+        return super(Producto, self).create(vals)
+
+    @api.multi
+    @zero_price_when_no_stock
+    def write(self, vals):
+        return super(Producto, self).write(vals)
