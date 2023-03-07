@@ -1,0 +1,164 @@
+<odoo>
+    <data>
+        <!-- Tree view for cliente -->
+        <record id="cliente_tree_view" model="ir.ui.view">
+            <field name="name">Cliente Tree View</field>
+            <field name="model">cliente</field>
+            <field name="arch" type="xml">
+                <tree string="Clientes">
+                    <field name="name"/>
+                    <field name="street"/>
+                    <field name="city"/>
+                    <field name="state"/>
+                    <field name="zip"/>
+                    <field name="country"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view for cliente -->
+        <record id="cliente_form_view" model="ir.ui.view">
+            <field name="name">Cliente Form View</field>
+            <field name="model">cliente</field>
+            <field name="arch" type="xml">
+                <form string="Cliente">
+                    <group>
+                        <field name="name"/>
+                        <field name="street"/>
+                        <field name="city"/>
+                        <field name="state"/>
+                        <field name="zip"/>
+                        <field name="country"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for factura -->
+        <record id="factura_tree_view" model="ir.ui.view">
+            <field name="name">Factura Tree View</field>
+            <field name="model">factura</field>
+            <field name="arch" type="xml">
+                <tree string="Facturas">
+                    <field name="name"/>
+                    <field name="date_issued"/>
+                    <field name="date_due"/>
+                    <field name="total_amount"/>
+                    <field name="cliente_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view for factura -->
+        <record id="factura_form_view" model="ir.ui.view">
+            <field name="name">Factura Form View</field>
+            <field name="model">factura</field>
+            <field name="arch" type="xml">
+                <form string="Factura">
+                    <group>
+                        <field name="name"/>
+                        <field name="date_issued"/>
+                        <field name="date_due"/>
+                        <field name="total_amount"/>
+                        <field name="cliente_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for producto -->
+        <record model="ir.ui.view" id="producto_form_view">
+            <field name="name">producto.form</field>
+            <field name="model">producto</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="pvp"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Form view for producto -->
+        <record model="ir.ui.view" id="producto_form_view">
+            <field name="name">producto.form</field>
+            <field name="model">producto</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="pvp"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action para la vista Tree de Productos -->
+        <record id="action_producto_tree" model="ir.actions.act_window">
+            <field name="name">Productos</field>
+            <field name="res_model">producto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Haz clic para crear un nuevo producto</p>
+            </field>
+        </record>
+
+        <!-- Action para la vista Formulario de Productos -->
+        <record id="action_producto_form" model="ir.actions.act_window">
+            <field name="name">Producto</field>
+            <field name="res_model">producto</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- Action para la vista Tree de Clientes -->
+        <record id="action_cliente_tree" model="ir.actions.act_window">
+            <field name="name">Clientes</field>
+            <field name="res_model">cliente</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Haz clic para crear un nuevo cliente</p>
+            </field>
+        </record>
+
+        <!-- Action para la vista Formulario de Clientes -->
+        <record id="action_cliente_form" model="ir.actions.act_window">
+            <field name="name">Cliente</field>
+            <field name="res_model">cliente</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- Action para la vista Tree de Facturas -->
+        <record id="action_factura_tree" model="ir.actions.act_window">
+            <field name="name">Facturas</field>
+            <field name="res_model">factura</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Haz clic para crear una nueva factura</p>
+            </field>
+        </record>
+
+        <!-- Action para la vista Formulario de Facturas -->
+        <record id="action_factura_form" model="ir.actions.act_window">
+            <field name="name">Factura</field>
+            <field name="res_model">factura</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- Top level menu item -->
+        <menuitem id="main_menu" name="Facturación"/>
+
+        <menuitem id="client_menu" name="Clientes" parent="main_menu" sequence="10" action="client_act"/>
+        <act_window id="client_act" name="Clientes" res_model="cliente" view_mode="tree,form"/>
+
+        <menuitem id="invoice_menu" name="Facturas" parent="main_menu" sequence="20" action="invoice_act"/>
+        <act_window id="invoice_act" name="Facturas" res_model="factura" view_mode="tree,form"/>
+
+        <menuitem id="product_menu" name="Productos" parent="main_menu" sequence="30" action="product_act"/>
+        <act_window id="product_act" name="Productos" res_model="producto" view_mode="tree,form"/>
+
+
+    </data>
+</odoo>

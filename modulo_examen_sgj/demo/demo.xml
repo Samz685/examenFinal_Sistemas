@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+        <record model="cliente" id="cliente_ejemplo">
+            <field name="name">Juan Pérez</field>
+            <field name="street">Calle Falsa 123</field>
+            <field name="city">Ciudad de México</field>
+            <field name="state">CDMX</field>
+            <field name="zip">01234</field>
+            <field name="country">México</field>
+        </record>
+
+        <record model="factura" id="factura_ejemplo">
+            <field name="name">F0001</field>
+            <field name="date_issued">2023-01-01</field>
+            <field name="date_due">2023-02-01</field>
+            <field name="total_amount">1000.00</field>
+            <field name="cliente_id" ref="cliente_ejemplo"/>
+        </record>
+
+        <record model="producto" id="producto_ejemplo">
+            <field name="name">Producto 1</field>
+            <field name="description">Descripción del producto 1</field>
+            <field name="pvp">10.00</field>
+        </record>
+
+
+    </data>
+</odoo>
